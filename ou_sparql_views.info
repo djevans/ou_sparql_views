@@ -1,0 +1,6 @@
+name = OU Research Hub - SPARQL Views
+description = A collection of SPARQL views used by the OU Research Hub.
+dependencies[] = sparql_views
+dependencies[] = sparql_views_related_resource
+package = OU Research Hub
+core = 7.x

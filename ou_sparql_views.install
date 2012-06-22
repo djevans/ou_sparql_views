@@ -1,0 +1,625 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */  
+function ou_sparql_views_install() {
+  foreach (_ou_sparql_views_installed_resource_types() as $resource_type) {
+    sparql_views_resource_type_save($resource_type);
+  }
+
+  // Create all the fields we are adding.
+  foreach (_ou_sparql_views_installed_fields() as $field) {
+    field_create_field($field);
+  }
+
+  // Attach instances of the fields to the resource type and user entity.
+  foreach (_ou_sparql_views_installed_field_instances() as $bundle_name => $bundle) {
+    foreach ($bundle as $instance) {
+      $instance['bundle'] = $bundle_name;
+      $instance['entity_type'] = 'sparql_views_resource';
+      field_create_instance($instance);
+    }
+  }
+
+}
+
+/**
+* Implements hook_uninstall().
+*/
+function ou_sparql_views_uninstall() {
+  // Delete fields
+  foreach (_ou_sparql_views_installed_fields() as $field) {
+    field_delete_field($field['field_name']);
+  }
+  
+  // Delete the resource type
+  foreach (_ou_sparql_views_installed_resource_types() as $resource_type) {
+    sparql_views_resource_type_delete($resource_type['name']);
+  }
+  
+}
+
+function _ou_sparql_views_installed_resource_types() {
+  // Use get_t() to get the name of our localization function for translation
+  // during install, when t() is not available.
+  $t = get_t();
+  $resource_types = array();
+  
+  // do something here
+  // Create an array of endpoints.
+  $endpoints = array();
+  $endpoints['data.open.ac.uk'] = array(
+    'title' => $t('OU Research Hub'),
+    'uri' => 'http://data.open.ac.uk/query',
+  );
+
+  // Save the endpoints to the database.
+  sparql_views_register_endpoints($endpoints);
+
+  // Define the SPARQL Views resource types.
+  $resource_types['ou_person'] = array(
+    'name' => 'ou_person',
+    'label' => $t('Person (OU Research Hub)'),
+    'base' => 'sparql_views_resource',
+    'description' => $t('A Person'),
+    'endpoints' => array(
+      $endpoints['data.open.ac.uk']['uri'] => TRUE,
+    ),
+  );
+  
+  $resource_types['ou_publication'] = array(
+    'name' => 'ou_publication',
+    'label' => $t('Publication (OU Research Hub)'),
+    'base' => 'sparql_views_resource',
+    'description' => $t('A Publication'),
+    'endpoints' => array(
+      $endpoints['data.open.ac.uk']['uri'] => TRUE,
+    ),
+  );
+  
+  $resource_types['ou_post'] = array(
+    'name' => 'ou_post',
+    'label' => $t('Post (OU Research Hub)'),
+    'base' => 'sparql_views_resource',
+    'description' => $t('A Post'),
+    'endpoints' => array(
+      $endpoints['data.open.ac.uk']['uri'] => TRUE,
+    ),
+  );
+  
+  return $resource_types;
+  
+}  
+
+function _ou_sparql_views_installed_fields() {
+  $t = get_t();
+  
+  $dc = array( // 9
+    array(
+      'field_name' => 'ou_dc_title',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_dc_creator',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_dc_date',
+      'type' => 'text', // could be different ..
+    ),
+    array(
+      'field_name' => 'ou_dc_description',
+      'type' => 'text_long',
+    ),
+    array(
+      'field_name' => 'ou_dc_subject',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_dc_publisher',
+      'type' => 'sparql_views_related_resource',
+    ),
+    // issuer -- isn't in the formal DC-RDF ontology but we'll include it as text to see what happend
+    array(
+      'field_name' => 'ou_dc_issuer',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_dc_has_part',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_dc_is_part_of',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  $rdfs = array( // 3
+    array(
+      'field_name' => 'ou_rdfs_label',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_rdfs_see_also',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_rdfs_comment',
+      'type' => 'text_long',
+    ),
+  );
+  
+  $foaf = array( // 16
+    array(
+      'field_name' => 'ou_foaf_name',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_type',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_firstname',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_surname',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_givenname',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_family_name',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_thumbnail',
+      'type' => 'image',
+    ),
+    array(
+      'field_name' => 'ou_foaf_homepage',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_foaf_workplace_homepage',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_foaf_workinfo_homepage',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_foaf_currentproject',
+      'type' => 'sparql_views_related_resource',
+    ),    
+    array(
+      'field_name' => 'ou_foaf_pastproject',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_foaf_mbox_sha1sum',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_foaf_phone',
+      'type' => 'text', // should be related_resource?
+    ),
+    array(
+      'field_name' => 'ou_foaf_jabberid',
+      'type' => 'text',
+    ),    
+    array(
+      'field_name' => 'ou_foaf_primary_topic',
+      'type' => 'text',
+    ),    
+    array(
+      'field_name' => 'ou_foaf_based_near',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_foaf_publications',
+      'type' => 'sparql_views_related_resource',
+    ),    
+    array(
+      'field_name' => 'ou_foaf_maker',
+      'type' => 'sparql_views_related_resource',
+    ), 
+    array(
+      'field_name' => 'ou_foaf_topic_interest',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  $owl = array( // 1
+    array(
+      'field_name' => 'ou_owl_same_as',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  // airport is what - dbpedia?
+  $airport = array( // 3
+    array(
+      'field_name' => 'ou_airport_iatacode',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_airport_name',
+      'type' => 'text',
+    ),
+    // location -- ?
+    array(
+      'field_name' => 'ou_airport_location',
+      'type' => 'text',
+    ),
+  );
+  
+  $geo = array( // 2
+    array(
+      'field_name' => 'ou_geo_lat',
+      'type' => 'number_decimal',
+    ),
+    array(
+      'field_name' => 'ou_geo_long',
+      'type' => 'number_decimal',
+    ),
+  );
+  
+  $bibo = array( // 11
+    array(
+      'field_name' => 'ou_bibo_abstract',
+      'type' => 'text_long',
+    ),
+    array(
+      'field_name' => 'ou_bibo_author_list',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_editor_list',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_uri',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_bibo_isbn',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_bibo_issn',
+      'type' => 'text',
+    ),
+    array(
+      'field_name' => 'ou_bibo_presented_at',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_status',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_degree',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_location',
+      'type' => 'sparql_views_related_resource',
+    ),
+    array(
+      'field_name' => 'ou_bibo_volume',
+      'type' => 'text',
+    )
+  );
+  
+  $epterms = array( // 1
+    array(
+      'field_name' => 'ou_epterms_is_mainfested_as',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  $event = array( // 1
+    array(
+      'field_name' => 'ou_event_place',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  $cc = array( // 1
+    array(
+      'field_name' => 'ou_cc_license',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+
+  $rss = array( // 1
+    array(
+      'field_name' => 'ou_rss_link',
+      'type' => 'text',
+    ),
+  );
+  
+  $contact = array( // 1
+    array(
+      'field_name' => 'ou_contact_nearest_airport',
+      'type' => 'sparql_views_related_resource',
+    ),
+  );
+  
+  $fields = array_merge($dc,$rdfs,$foaf,$owl,$airport,$geo,$bibo,$epterms,$event,$cc,$rss,$contact);
+  return $fields;
+    
+}
+
+function _ou_sparql_views_installed_field_instances() {
+  $t = get_t();
+  $instances = array();
+  
+  $instances['ou_person'] = array(
+    // FOAF
+    array(
+      'field_name' => 'ou_foaf_publications',
+      'label' => $t('Publications'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_primary_topic',
+      'label' => $t('Primary Topic'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_workinfo_homepage',
+      'label' => $t('Work Info Homepage'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_firstname',
+      'label' => $t('First Name'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_based_near',
+      'label' => $t('Based Near'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_homepage',
+      'label' => $t('Homepage'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_pastproject',
+      'label' => $t('Past Project'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_thumbnail',
+      'label' => $t('Thumbnail'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_maker',
+      'label' => $t('Maker'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_topic_interest',
+      'label' => $t('Topic of Interest'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_surname',
+      'label' => $t('Surname'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_phone',
+      'label' => $t('Phone'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_workplace_homepage',
+      'label' => $t('Workplace Homepage'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_mbox_sha1sum',
+      'label' => $t('MBox'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_jabberid',
+      'label' => $t('Jabber ID'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_currentproject',
+      'label' => $t('Current Project'),
+    ),
+    // AIRPORT
+    array(
+      'field_name' => 'ou_airport_iatacode',
+      'label' => $t('IATA Code'),
+    ),
+    array(
+      'field_name' => 'ou_airport_name',
+      'label' => $t('Name'),
+    ),
+    array(
+      'field_name' => 'ou_airport_location',
+      'label' => $t('Location'),
+    ),
+    // GEO (WGS84)
+    array(
+      'field_name' => 'ou_geo_lat',
+      'label' => $t('Latitude'),
+    ),
+    array(
+      'field_name' => 'ou_geo_long',
+      'label' => $t('Longitude'),
+    ),    
+    // DC
+    array(
+      'field_name' => 'ou_dc_title',
+      'label' => $t('Title'),
+    ),
+    // RDFS
+    array(
+      'field_name' => 'ou_rdfs_label',
+      'label' => $t('Label'),
+    ),
+    array(
+      'field_name' => 'ou_rdfs_see_also',
+      'label' => $t('See Also'),
+    ),
+    // OWL
+    array(
+      'field_name' => 'ou_owl_same_as',
+      'label' => $t('Same As'),
+    ),
+  );
+  
+  $instances['ou_publication'] = array(
+    // DC
+    array(
+      'field_name' => 'ou_dc_publisher',
+      'label' => $t('Publisher'),
+    ),
+    array(
+      'field_name' => 'ou_dc_issuer',
+      'label' => $t('Issuer'),
+    ),
+    array(
+      'field_name' => 'ou_dc_subject',
+      'label' => $t('Subject'),
+    ),
+    array(
+      'field_name' => 'ou_dc_creator',
+      'label' => $t('Creator'),
+    ),
+    array(
+      'field_name' => 'ou_dc_title',
+      'label' => $t('Title'),
+    ),
+    array(
+      'field_name' => 'ou_dc_has_part',
+      'label' => $t('Has Part'),
+    ),
+    array(
+      'field_name' => 'ou_dc_is_part_of',
+      'label' => $t('Is Part Of'),
+    ),
+    array(
+      'field_name' => 'ou_dc_date',
+      'label' => $t('Date'),
+    ),
+    // RDFS
+    array(
+      'field_name' => 'ou_rdfs_label',
+      'label' => $t('Label'),
+    ),
+    // BIBO
+    array(
+      'field_name' => 'ou_bibo_abstract',
+      'label' => $t('Abstract'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_presented_at',
+      'label' => $t('Presented At'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_degree',
+      'label' => $t('Degree'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_issn',
+      'label' => $t('ISSN'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_isbn',
+      'label' => $t('ISBN'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_uri',
+      'label' => $t('URL'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_author_list',
+      'label' => $t('Author List'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_editor_list',
+      'label' => $t('Editor List'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_status',
+      'label' => $t('Status'),
+    ),
+    array(
+      'field_name' => 'ou_bibo_volume',
+      'label' => $t('Volume'),
+    ),
+    // FOAF
+    array(
+      'field_name' => 'ou_foaf_name',
+      'label' => $t('Name'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_type',
+      'label' => $t('Type'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_givenname',
+      'label' => $t('Given Name'),
+    ),
+    array(
+      'field_name' => 'ou_foaf_family_name',
+      'label' => $t('Family Name'),
+    ),
+    // OWL
+    array(
+      'field_name' => 'ou_owl_same_as',
+      'label' => $t('Same As'),
+    ),
+    // EPRINTS
+    array(
+      'field_name' => 'ou_epterms_is_mainfested_as',
+      'label' => $t('Is Manifested As'),
+    ),
+    // EVENT
+    array(
+      'field_name' => 'ou_event_place',
+      'label' => $t('Place'),
+    ),
+    // CC
+    array(
+      'field_name' => 'ou_cc_license',
+      'label' => $t('License'),
+    ),
+  );
+  
+  $instances['ou_post'] = array(
+    // DC
+    array(
+      'field_name' => 'ou_dc_description',
+      'label' => $t('Description'),
+    ),
+    array(
+      'field_name' => 'ou_dc_creator',
+      'label' => $t('Creator'),
+    ),
+    array(
+      'field_name' => 'ou_dc_title',
+      'label' => $t('Title'),
+    ),
+    array(
+      'field_name' => 'ou_dc_date',
+      'label' => $t('Date'),
+    ),
+    // RDFS
+    array(
+      'field_name' => 'ou_rdfs_label',
+      'label' => $t('Label'),
+    ),
+    array(
+      'field_name' => 'ou_rdfs_comment',
+      'label' => $t('Comment'),
+    ),
+    // RSS
+    array(
+      'field_name' => 'ou_rss_link',
+      'label' => $t('Link'),
+    ),
+  );
+  
+  return $instances;
+}

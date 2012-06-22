@@ -1,0 +1,227 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function ou_sparql_views_views_api($module, $api) {
+  return array(
+    'api' => 3,
+  );
+}
+
+function ou_sparql_views_rdf_mapping() {
+  $mappings = array(
+    'ou_person' => array(
+      'type' => 'sparql_views_resource',
+      'bundle' => 'ou_person',
+      'mapping' => array(
+        'rdftype' => array('foaf:Person'),
+        'ou_foaf_publications' => array(
+          'predicates' => array('foaf:publications'),
+        ),
+        'ou_foaf_primary_topic' => array(
+          'predicates' => array('foaf:primary_topic'),
+        ),
+        'ou_foaf_workinfo_homepage' => array(
+          'predicates' => array('foaf:workinfoHomepage'),
+        ),
+        'ou_foaf_firstname' => array(
+          'predicates' => array('foaf:firstname'),
+        ),
+        'ou_foaf_based_near' => array(
+          'predicates' => array('foaf:based_near'),
+        ),
+        'ou_foaf_homepage' => array(
+          'predicates' => array('foaf:homepage'),
+        ),
+        'ou_foaf_pastproject' => array(
+          'predicates' => array('foaf:pastproject'),
+        ),
+        'ou_foaf_thumbnail' => array(
+          'predicates' => array('foaf:thumbnail'),
+        ),
+        'ou_foaf_maker' => array(
+          'predicates' => array('foaf:maker'),
+        ),
+        'ou_foaf_topic_interest' => array(
+          'predicates' => array('foaf:topic_interest'),
+        ),
+        'ou_foaf_surname' => array(
+          'predicates' => array('foaf:surname'),
+        ),
+        'ou_foaf_phone' => array(
+          'predicates' => array('foaf:phone'),
+        ),
+        'ou_foaf_workplace_homepage' => array(
+          'predicates' => array('foaf:workplaceHomepage'),
+        ),
+        'ou_foaf_mbox_sha1sum' => array(
+          'predicates' => array('foaf:mbx_sha1sum'),
+        ),
+        'ou_foaf_jabberid' => array(
+          'predicates' => array('foaf:jabberid'),
+        ),
+        'ou_foaf_currentproject' => array(
+          'predicates' => array('foaf:currentproject'),
+        ),
+        'ou_airport_iatacode' => array(
+          'predicates' => array('airport:iatacode'),
+        ),
+        'ou_airport_name' => array(
+          'predicates' => array('airport:name'),
+        ),
+        'ou_airport_location' => array(
+          'predicates' => array('airport:location'),
+        ),
+        'ou_geo_lat' => array(
+          'predicates' => array('geo:lat'),
+        ),
+        'ou_geo_long' => array(
+          'predicates' => array('geo:long'),
+        ),        
+        'ou_dc_title' => array(
+          'predicates' => array('dc:title'),
+        ),
+        'ou_rdfs_label' => array(
+          'predicates' => array('rdfs:label'),
+        ),
+        'ou_rdfs_see_also' => array(
+          'predicates' => array('rdfs:seeAlso'),
+        ),
+        'ou_owl_same_as' => array(
+          'predicates' => array('owl:sameAs'),
+        ),
+      ),
+    ),
+    'ou_publication' => array(
+      'type' => 'sparql_views_resource',
+      'bundle' => 'ou_publication',
+      'mapping' => array(
+        'rdftype' => array('bibo:Article'),
+        'ou_dc_publisher' => array(
+          'predicates' => array('dc:publisher'),
+        ),
+        'ou_dc_issuer' => array(
+          'predicates' => array('dc:issuer'),
+        ),
+        'ou_dc_subject' => array(
+          'predicates' => array('dc:subject'),
+        ),
+        'ou_dc_creator' => array(
+          'predicates' => array('dc:creator'),
+        ),
+        'ou_dc_title' => array(
+          'predicates' => array('dc:title'),
+        ),
+        'ou_dc_has_part' => array(
+          'predicates' => array('dc:hasPart'),
+        ),
+        'ou_dc_is_part_of' => array(
+          'predicates' => array('dc:isPartOf'),
+        ),
+        'ou_dc_date' => array(
+          'predicates' => array('dc:date'),
+        ),
+        'ou_rdfs_label' => array(
+          'predicates' => array('rdfs:label'),
+        ),
+        'ou_bibo_abstract' => array(
+          'predicates' => array('bibo:abstract'),
+        ),
+        'ou_bibo_presented_at' => array(
+          'predicates' => array('bibo:presentedAt'),
+        ),
+        'ou_bibo_degree' => array(
+          'predicates' => array('bibo:degree'),
+        ),
+        'ou_bibo_issn' => array(
+          'predicates' => array('bibo:issn'),
+        ),
+        'ou_bibo_isbn' => array(
+          'predicates' => array('bibo:isbn'),
+        ),
+        'ou_bibo_uri' => array(
+          'predicates' => array('bibo:uri'),
+        ),
+        'ou_bibo_author_list' => array(
+          'predicates' => array('bibo:authorList'),
+        ),
+        'ou_bibo_editor_list' => array(
+          'predicates' => array('bibo:editorList'),
+        ),
+        'ou_bibo_status' => array(
+          'predicates' => array('bibo:status'),
+        ),
+        'ou_bibo_volume' => array(
+          'predicates' => array('bibo:volume'),
+        ),
+        'ou_foaf_name' => array(
+          'predicates' => array('foaf:name'),
+        ),
+        'ou_foaf_type' => array(
+          'predicates' => array('foaf:type'),
+        ),
+        'ou_foaf_givenname' => array(
+          'predicates' => array('foaf:givenname'),
+        ),
+        'ou_foaf_family_name' => array(
+          'predicates' => array('foaf:family_name'),
+        ),
+        'ou_owl_same_as' => array(
+          'predicates' => array('owl:sameAs'),
+        ),
+        'ou_epterms_is_mainfested_as' => array(
+          'predicates' => array('epterms:isManifestedAs'),
+        ),
+        'ou_event_place' => array(
+          'predicates' => array('event:place'),
+        ),
+        'ou_cc_license' => array(
+          'predicates' => array('cc:license'),
+        ),
+      ),
+    ),
+    'ou_post' => array(
+      'type' => 'sparql_views_resource',
+      'bundle' => 'ou_post',
+      'mapping' => array(
+        'rdftype' => array('sioc:Post'),
+        'ou_dc_title' => array(
+          'predicates' => array('dc:title'),
+        ),
+        'ou_dc_description' => array(
+          'predicates' => array('dc:description'),
+        ),
+        'ou_dc_creator' => array(
+          'predicates' => array('dc:creator'),
+        ),
+        'ou_dc_date' => array(
+          'predicates' => array('dc:date'),
+        ),
+        'ou_rdfs_label' => array(
+          'predicates' => array('rdfs:label'),
+        ),
+        'ou_rdfs_comment' => array(
+          'predicates' => array('rdfs:comment'),
+        ),
+        'ou_rss_link' => array(
+          'predicates' => array('rss:link'),
+        ),
+      ),
+    ),
+  );
+  return $mappings;
+}
+
+function ou_sparql_views_rdf_namespaces() {
+  $namespaces = array(
+    'bibo' => 'http://purl.org/ontology/bibo/',
+    'airport' => 'http://dbpedia.org/property/',
+    'geo' => 'http://www.w3.org/2003/01/geo/wgs84_pos#',
+    'epterms' => 'http://purl.org/eprint/terms/',
+    'event' => 'http://purl.org/NET/c4dm/event.owl#',
+    'cc' => 'http://creativecommons.org/ns#',
+    'contact' => 'http://www.w3.org/2000/10/swap/pim/contact#',
+  );
+  return $namespaces;
+}
