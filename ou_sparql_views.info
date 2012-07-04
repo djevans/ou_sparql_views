@@ -4,3 +4,6 @@ dependencies[] = sparql_views
 dependencies[] = sparql_views_related_resource
 package = OU Research Hub
 core = 7.x
+files[] = ou_sparql_views.views.inc
+files[] = plugins/ou_sparql_views_argument_default_user_field.inc
+files[] = plugins/ou_sparql_views_plugin_argument_validate_user_field.inc

@@ -1,0 +1,46 @@
+PERSON
+foaf:
+  oublictaions
+  primary_topic
+  workinfoHomepage
+  firstname
+  based_near
+  homepage
+  pastproject
+  thumbnail
+  maker
+  topic_interest
+  surname
+  phone
+  workplaceHomepage
+  mbox_sha1sum
+  jabberid
+  currentproject
+airport:
+  iatacode
+  name
+  location
+geo:
+  lat
+  long
+dc:
+  title
+rdfs:
+  label
+  seeAlso
+  sameAs
+  
+PUBLICATION
+
+
+POST
+dc:
+  description
+  creator
+  title
+  date
+rdfs:
+  label
+  comment
+rss:
+  link
