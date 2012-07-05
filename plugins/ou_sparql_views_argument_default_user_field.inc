@@ -6,7 +6,7 @@ class ou_sparql_views_argument_default_user_field extends views_plugin_argument_
     
     $uid = parent::get_argument();
     $source_field = $this->options['sparql_options']['source_field'];
-    $field = field_get_items('user', $account, $source_field);
+    $field = field_get_items('user', $uid, $source_field);
     $replacement = $field[0]['value'];
     return $replacement;
     
