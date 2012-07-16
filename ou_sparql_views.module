@@ -222,6 +222,7 @@ function ou_sparql_views_rdf_namespaces() {
     'event' => 'http://purl.org/NET/c4dm/event.owl#',
     'cc' => 'http://creativecommons.org/ns#',
     'contact' => 'http://www.w3.org/2000/10/swap/pim/contact#',
+    'dcelements' => 'http://purl.org/dc/elements/1.1/',
   );
   return $namespaces;
 }

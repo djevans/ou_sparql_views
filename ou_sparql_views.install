@@ -94,6 +94,13 @@ function _ou_sparql_views_installed_resource_types() {
 
 function _ou_sparql_views_installed_fields() {
   $t = get_t();
+
+  $dcelements = array(
+    array(
+      'field_name' => 'ou_dcelements_description',
+      'type' => 'text_with_summary',
+    ),
+  );
   
   $dc = array( // 9
     array(
@@ -350,7 +357,7 @@ function _ou_sparql_views_installed_fields() {
     ),
   );
   
-  $fields = array_merge($dc,$rdfs,$foaf,$owl,$airport,$geo,$bibo,$epterms,$event,$cc,$rss,$contact);
+  $fields = array_merge($dcelements,$dc,$rdfs,$foaf,$owl,$airport,$geo,$bibo,$epterms,$event,$cc,$rss,$contact);
   return $fields;
     
 }
@@ -465,6 +472,11 @@ function _ou_sparql_views_installed_field_instances() {
     array(
       'field_name' => 'ou_owl_same_as',
       'label' => $t('Same As'),
+    ),
+    // DCELEMENTS
+    array(
+      'field_name' => 'ou_dcelements_description',
+      'label' => $t('Description'),
     ),
   );
   
