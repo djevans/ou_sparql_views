@@ -3,7 +3,7 @@
 class ou_sparql_views_argument_default_user_field extends views_plugin_argument_default_user {
   
   function get_argument() {
-    
+    watchdog('ou_sparql_views','Get argumnet: %s',array('%s' => $this->options['sparql_options']['source_field']));
     $uid = parent::get_argument();
     $source_field = $this->options['sparql_options']['source_field'];
     $field = field_get_items('user', $uid, $source_field);
