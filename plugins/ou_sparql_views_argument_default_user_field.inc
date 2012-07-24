@@ -1,23 +1,8 @@
 <?php
 
 class ou_sparql_views_argument_default_user_field extends views_plugin_argument_default_user {
-  
-  function get_argument() {
-    
-    $uid = parent::get_argument();
-    $source_field = $this->options['sparql_options']['source_field'];
-    $field = field_get_items('user', $uid, $source_field);
-    $replacement = $field[0]['value'];
-    return $replacement;
-    
-  }
-  
-  /**
-   * Provide the default form for setting options.
-   */
-  function options_form(&$form, &$form_state) {
-    parent::options_form($form, $form_state);
-
+	
+	function options_form(&$form, &$form_state) {
     $fields = array();
     $instance_info = field_info_instances('user');
     foreach ($instance_info as $bundle) {
@@ -33,6 +18,6 @@ class ou_sparql_views_argument_default_user_field extends views_plugin_argument_
       '#description' => t('The variable in the query will be replaced with the value of this field on the node.'),
       '#weight' => -1,
     );  
-  }
-  
+	}
+
 }
