@@ -8,7 +8,7 @@ class ou_sparql_views_argument_validate_user_field extends views_plugin_argument
       $account = user_load($uid);
       $source_field = $this->argument->options['default_argument_options']['sparql_options']['source_field'];
       $field = field_get_items('user', $account, $source_field);
-      $value = $field[0]['url'];
+      $value = $field[0]['value'];
       if (!empty($value)) {
         $this->argument->argument = $value;
         return TRUE;
