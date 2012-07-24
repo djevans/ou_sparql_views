@@ -6,4 +6,5 @@ package = OU Research Hub
 core = 7.x
 files[] = ou_sparql_views.views.inc
 files[] = plugins/ou_sparql_views_argument_default_user_field.inc
-files[] = plugins/ou_sparql_views_plugin_argument_validate_user_field.inc
+files[] = plugins/ou_sparql_views_argument_validate_user_field.inc
+files[] = plugins/ou_sparql_views_plugin_fields_rss.inc
