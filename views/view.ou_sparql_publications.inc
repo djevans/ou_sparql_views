@@ -1,0 +1,193 @@
+<?php
+
+$view = new view;
+$view->name = 'ou_sparql_publications';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'sparql_views_2823727186';
+$view->human_name = 'Publications';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'My Publications';
+$handler->display->display_options['access']['type'] = 'none';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '10';
+$handler->display->display_options['style_plugin'] = 'list';
+$handler->display->display_options['row_plugin'] = 'fields';
+/* No results behavior: Global: Text area */
+$handler->display->display_options['empty']['area']['id'] = 'area';
+$handler->display->display_options['empty']['area']['table'] = 'views';
+$handler->display->display_options['empty']['area']['field'] = 'area';
+$handler->display->display_options['empty']['area']['empty'] = FALSE;
+$handler->display->display_options['empty']['area']['content'] = 'No publications found. %1 !1';
+$handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+$handler->display->display_options['empty']['area']['tokenize'] = 1;
+/* Field: Publication (OU Research Hub): URI */
+$handler->display->display_options['fields']['ou_publication']['id'] = 'ou_publication';
+$handler->display->display_options['fields']['ou_publication']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['fields']['ou_publication']['field'] = 'ou_publication';
+$handler->display->display_options['fields']['ou_publication']['label'] = '';
+$handler->display->display_options['fields']['ou_publication']['exclude'] = TRUE;
+$handler->display->display_options['fields']['ou_publication']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['external'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['ou_publication']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['ou_publication']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['ou_publication']['alter']['html'] = 0;
+$handler->display->display_options['fields']['ou_publication']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['ou_publication']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['ou_publication']['hide_empty'] = 0;
+$handler->display->display_options['fields']['ou_publication']['empty_zero'] = 0;
+$handler->display->display_options['fields']['ou_publication']['hide_alter_empty'] = 1;
+/* Field: Publication (OU Research Hub): URL */
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['id'] = 'ou_publication_ou_bibo_uri';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['field'] = 'ou_publication_ou_bibo_uri';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['label'] = '';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['exclude'] = TRUE;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['external'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['alter']['html'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['hide_empty'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['empty_zero'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_uri']['required'] = 0;
+/* Field: Publication (OU Research Hub): Title */
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['id'] = 'ou_publication_ou_dc_title';
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['field'] = 'ou_publication_ou_dc_title';
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['label'] = '';
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['make_link'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['path'] = '[ou_publication_ou_bibo_uri]';
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['absolute'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['external'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['alter']['html'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['hide_empty'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['empty_zero'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_title']['required'] = 1;
+/* Field: Publication (OU Research Hub): Date */
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['id'] = 'ou_publication_ou_dc_date';
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['field'] = 'ou_publication_ou_dc_date';
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['label'] = 'Published';
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['external'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['alter']['html'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['hide_empty'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['empty_zero'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_dc_date']['required'] = 0;
+/* Field: Publication (OU Research Hub): Abstract */
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['id'] = 'ou_publication_ou_bibo_abstract';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['field'] = 'ou_publication_ou_bibo_abstract';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['label'] = '';
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['external'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['alter']['html'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['hide_empty'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['empty_zero'] = 0;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['ou_publication_ou_bibo_abstract']['required'] = 0;
+/* Sort criterion: Publication (OU Research Hub): Date */
+$handler->display->display_options['sorts']['ou_publication_ou_dc_date']['id'] = 'ou_publication_ou_dc_date';
+$handler->display->display_options['sorts']['ou_publication_ou_dc_date']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['sorts']['ou_publication_ou_dc_date']['field'] = 'ou_publication_ou_dc_date';
+$handler->display->display_options['sorts']['ou_publication_ou_dc_date']['order'] = 'DESC';
+/* Contextual filter: Publication (OU Research Hub): Creator */
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['id'] = 'ou_publication_ou_dc_creator';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['field'] = 'ou_publication_ou_dc_creator';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['default_action'] = 'default';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['default_argument_type'] = 'ou_sparql_views_argument_default_user_field';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['default_argument_options']['user'] = FALSE;
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['default_argument_skip_url'] = 0;
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['summary']['number_of_records'] = '0';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['summary']['format'] = 'default_summary';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['specify_validation'] = 1;
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['validate']['type'] = 'ou_sparql_views_argument_validate_user_field';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['validate_options']['type'] = 'either';
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['validate_options']['restrict_roles'] = 0;
+$handler->display->display_options['arguments']['ou_publication_ou_dc_creator']['sparql_options'] = array(
+  'value_type' => 'uri',
+  'language' => '0',
+  'code' => '',
+);
+/* Filter criterion: Publication (OU Research Hub): RDF type */
+$handler->display->display_options['filters']['ou_publication_type']['id'] = 'ou_publication_type';
+$handler->display->display_options['filters']['ou_publication_type']['table'] = 'sparql_views_2823727186';
+$handler->display->display_options['filters']['ou_publication_type']['field'] = 'ou_publication_type';
+$handler->display->display_options['filters']['ou_publication_type']['value'] = 'bibo:Article';
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'publications/%';
+
+/* Display: Block */
+$handler = $view->new_display('block', 'Block', 'block');
+$handler->display->display_options['defaults']['pager'] = FALSE;
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '3';
